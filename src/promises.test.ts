@@ -18,7 +18,7 @@ describe('Promises', () => {
             { data: [], input: '', iterator: 0 },
             typings.object,
           ],
-          expected: fakeDB,
+          expected: fakeDB.map(({ name }) => name),
         },
         {
           invite: 'input : "a"',
@@ -27,7 +27,9 @@ describe('Promises', () => {
             { data: [], input: 'full', iterator: 10 },
             typings.object,
           ],
-          expected: fakeDB.filter(({ name }) => name === 'a'),
+          expected: fakeDB
+            .filter(({ name }) => name === 'a')
+            .map(({ name }) => name),
         },
         {
           invite: 'input : "Pa"',
@@ -36,7 +38,9 @@ describe('Promises', () => {
             { data: [], input: 'full', iterator: 10 },
             typings.object,
           ],
-          expected: fakeDB.filter(({ name }) => name === 'Pa'),
+          expected: fakeDB
+            .filter(({ name }) => name === 'Pa')
+            .map(({ name }) => name),
         },
       ),
     );

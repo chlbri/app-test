@@ -1,6 +1,6 @@
 import { createConfig, createMachine, EVENTS_FULL } from '@bemedev/app-ts';
 import { typings } from '@bemedev/app-ts/lib/utils';
-import type { ActionParamsFrom, ContextsFrom } from '../types';
+import type { ActionParamsFrom, ContextsFrom } from '../types.types';
 import { DELAY } from './constants';
 import { fakeDB } from './fakeDB';
 import { machine1 } from './machine1';
@@ -140,12 +140,14 @@ export const machine2 = createMachine(
     },
     promises: {
       fetch: async (_, { input }) => {
-        return fakeDB.filter(item => item.name.includes(input));
+        return fakeDB
+          .filter(item => item.name.includes(input))
+          .map(({ name }) => name);
       },
     },
     delays: {
       DELAY,
-      DELAY2: 2 * DELAY,
+      DELAY2: () => 2 * DELAY,
     },
     machines: {
       machine1: createChild(

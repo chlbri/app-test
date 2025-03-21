@@ -1,7 +1,7 @@
 {
-  "name": "@bemedev///TODO",
+  "name": "@bemedev/app-vitest",
   "version": "0.0.1",
-  "description": "//TODO",
+  "description": "/Vitest helpers for app-ts",
   "author": {
     "email": "bri_lvi@icloud.com",
     "name": "chlbri",

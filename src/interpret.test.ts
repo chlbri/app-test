@@ -335,8 +335,6 @@ describe('interpret', () => {
   });
 
   describe('#33 => Close the service', async () => {
-    
-
     test(...stop(2));
 
     test('#03 => Log the time of all tests', () => {

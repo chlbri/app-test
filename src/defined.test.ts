@@ -12,12 +12,26 @@ describe('AreDefineds', () => {
     success(
       {
         invite: 'defineds',
-        parameters: [machine2, 'inc', 'sendPanelToUser'],
+        parameters: [
+          machine2,
+          'inc',
+          'sendPanelToUser',
+          'isInputEmpty',
+          'fetch',
+          'DELAY',
+          'machine1',
+        ],
         expected: true,
       },
       {
         invite: 'notDefineds',
-        parameters: [machine2, 'inc', 'sendPanelToUser', 'notDefined'],
+        parameters: [
+          machine2,
+          'inc',
+          'sendPanelToUser',
+          'notDefined',
+          'DELAY2',
+        ],
         expected: false,
       },
     ),

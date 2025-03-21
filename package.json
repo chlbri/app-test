@@ -1,6 +1,6 @@
 {
   "name": "@bemedev/app-vitest",
-  "version": "0.0.1",
+  "version": "0.0.1-beta",
   "description": "Vitest helpers for app-ts",
   "author": {
     "email": "bri_lvi@icloud.com",

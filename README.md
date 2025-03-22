@@ -16,6 +16,13 @@ MIT
 ...
 </summary>
 
+### Version [0.0.2-beta] --> 2024-03-22 _19:30_
+
+- Some imporvements
+- 100% coverage
+
+<br/>
+
 ### Version [0.0.1-beta] --> 2024-03-21 _14:15_
 
 - ✨ Première version de la bibliothèque

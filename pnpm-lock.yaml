@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@bemedev/app-ts':
-        specifier: 0.1.13-beta
-        version: 0.1.13-beta
+        specifier: 0.1.16-beta
+        version: 0.1.16-beta
       '@bemedev/fsf':
         specifier: ^0.7.3
         version: 0.7.3
@@ -123,8 +123,8 @@ packages:
     resolution: {integrity: sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==}
     engines: {node: '>=18'}
 
-  '@bemedev/app-ts@0.1.13-beta':
-    resolution: {integrity: sha512-StVPoBVjhFMxYnwGysVlZk/CdmrqvzTs3kPDg7miphfi5YO/ErX/lcsKDxWphdIXo6u/JnEZTgtFsyQTNN8VXQ==}
+  '@bemedev/app-ts@0.1.16-beta':
+    resolution: {integrity: sha512-0/X2Rzm1EiHXN5s9ubyi4JU/mPz6Do/mUe/c+4dwZ+Yii/ym5NcDljpz143rg4mhiK+K+SjEy7jyAhZNGPIAIw==}
     engines: {node: '>=20'}
 
   '@bemedev/basifun@0.3.3':
@@ -1613,7 +1613,7 @@ snapshots:
 
   '@bcoe/v8-coverage@1.0.2': {}
 
-  '@bemedev/app-ts@0.1.13-beta':
+  '@bemedev/app-ts@0.1.16-beta':
     dependencies:
       '@bemedev/basifun': 0.3.3(@bemedev/types@0.1.5)
       '@bemedev/boolean-recursive': 0.0.3

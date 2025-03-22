@@ -1,6 +1,6 @@
 {
   "name": "@bemedev/app-vitest",
-  "version": "0.0.1-beta",
+  "version": "0.0.2-beta",
   "description": "Vitest helpers for app-ts",
   "author": {
     "email": "bri_lvi@icloud.com",
@@ -81,7 +81,7 @@
     }
   ],
   "devDependencies": {
-    "@bemedev/app-ts": "0.1.13-beta",
+    "@bemedev/app-ts": "0.1.16-beta",
     "@bemedev/fsf": "^0.7.3",
     "@bemedev/rollup-config": "^0.1.1",
     "@bemedev/types": "^0.1.5",

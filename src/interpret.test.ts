@@ -21,6 +21,9 @@ describe('interpret', () => {
     dispose,
     service,
     stop,
+    eventRaised,
+    lastRaised,
+    eventsSequenced,
   } = interpret(machine2, {
     pContext: {
       iterator: 0,
@@ -54,19 +57,21 @@ describe('interpret', () => {
   // #endregion
 
   test(...start());
-  test(...subscribe);
-  test(...pSelect('iterator', 0, 1));
-  test(...waiter(2, 6));
+  describe(...eventsSequenced(1, 'machine$$init'));
+  test(...subscribe(2));
+  test(...pSelect('iterator', 0, 3));
+  test(...waiter(4, 6));
 
-  describe('#03 => Check the service', () => {
+  describe('#05 => Check the service', () => {
     test(...pSelect('iterator', 6, 1));
     test(...select('iterator', 6, 2));
     describe(...useConsole(3));
   });
 
   test(...send('NEXT', 6));
+  test(...eventRaised('NEXT', 7));
 
-  describe('#04 => Check the service', () => {
+  describe('#08 => Check the service', () => {
     test(...pSelect('iterator', 6, 1));
     test(...select('iterator', 6, 2));
     describe(...useConsole(3));
@@ -83,25 +88,29 @@ describe('interpret', () => {
     );
   });
 
-  test(...waiter(5, 6));
+  test(...waiter(9, 6));
 
-  describe('#06 => Check the service', () => {
+  describe('#10 => Check the service', () => {
     test(...select('iterator', 18, 1));
     test(...pSelect('iterator', 12, 2));
     describe(...useConsole(3, ...Array(6).fill('sendPanelToUser')));
   });
 
-  test(...pause(7));
+  test('#11 => Length of calls of "dumbFn" is "33"', () => {
+    expect(dumbFn).toBeCalledTimes(9);
+  });
 
-  describe('#08 => Check the service', () => {
+  test(...pause(12));
+
+  describe('#13 => Check the service', () => {
     test(...select('iterator', 18, 1));
     test(...pSelect('iterator', 12, 2));
     describe(...useConsole(3));
   });
 
-  test(...waiter(5, 9));
+  test(...waiter(14, 9));
 
-  describe('#10 => Check the service', () => {
+  describe('#15 => Check the service', () => {
     test(
       ...value(
         {
@@ -120,10 +129,14 @@ describe('interpret', () => {
     describe(...useConsole(4));
   });
 
-  test(...resume(11));
-  test(...waiter(5, 12));
+  test('#16 => Length of calls of "dumbFn" is "33"', () => {
+    expect(dumbFn).toBeCalledTimes(9);
+  });
 
-  describe('#13 => Check the service', () => {
+  test(...resume(17));
+  test(...waiter(18, 12));
+
+  describe('#19 => Check the service', () => {
     test(
       ...value(
         {
@@ -142,9 +155,14 @@ describe('interpret', () => {
     describe(...useConsole(4, ...Array(12).fill('sendPanelToUser')));
   });
 
-  test(...write('', 14));
+  test('#20 => Length of calls of "dumbFn" is "33"', () => {
+    expect(dumbFn).toBeCalledTimes(15);
+  });
 
-  describe('#15 => Check the service', () => {
+  test(...write('', 21));
+  test(...eventRaised({ type: 'WRITE', payload: { value: '' } }, 22));
+
+  describe('#23 => Check the service', () => {
     test(
       ...value(
         {
@@ -164,9 +182,9 @@ describe('interpret', () => {
     test(...select('input', '', 5));
   });
 
-  test(...waiter(16, 12));
+  test(...waiter(24, 12));
 
-  describe('#17 => Check the service', () => {
+  describe('#25 => Check the service', () => {
     test(
       ...value(
         {
@@ -197,9 +215,10 @@ describe('interpret', () => {
     test(...select('input', '', 5));
   });
 
-  test(...write(INPUT, 18));
+  test(...write(INPUT, 26));
+  test(...eventRaised({ type: 'WRITE', payload: { value: INPUT } }, 27));
 
-  describe('#19 => Check the service', () => {
+  describe('#28 => Check the service', () => {
     test(
       ...value(
         {
@@ -218,9 +237,9 @@ describe('interpret', () => {
     test(...select('input', '', 5));
   });
 
-  test(...waiter(20, 12));
+  test(...waiter(29, 12));
 
-  describe('#21 => Check the service', () => {
+  describe('#30 => Check the service', () => {
     test(
       ...value(
         {
@@ -239,9 +258,11 @@ describe('interpret', () => {
     test(...select('input', '', 5));
   });
 
-  test(...write(INPUT, 22));
+  test(...write(INPUT, 31));
+  test(...lastRaised({ type: 'WRITE', payload: { value: INPUT } }, 32));
+  test(...eventRaised({ type: 'WRITE', payload: { value: '' } }, 33));
 
-  describe('#23 => Check the service', () => {
+  describe('#34 => Check the service', () => {
     test(
       ...value(
         {
@@ -260,9 +281,9 @@ describe('interpret', () => {
     test(...select('input', INPUT, 5));
   });
 
-  test(...waiter(24, 6));
+  test(...waiter(35, 6));
 
-  describe('#25 => Check the service', () => {
+  describe('#36 => Check the service', () => {
     test(
       ...value(
         {
@@ -281,9 +302,11 @@ describe('interpret', () => {
     test(...select('input', INPUT, 5));
   });
 
-  test(...send('FETCH', 26));
+  test(...eventRaised.not('FETCH', 37));
+  test(...send('FETCH', 38));
+  test(...eventRaised('FETCH', 39));
 
-  describe('#27 => Check the service', () => {
+  describe('#40 => Check the service', () => {
     test(
       ...value(
         {
@@ -303,18 +326,18 @@ describe('interpret', () => {
     test(...select('data', FAKES, 6));
   });
 
-  test('#28 => Length of calls of "dumbFn" is "86"', () => {
-    expect(dumbFn).toBeCalledTimes(86);
+  test('#41 => Length of calls of "dumbFn" is "33"', () => {
+    expect(dumbFn).toBeCalledTimes(33);
   });
 
-  test(...unsubscribe);
-  test(...waiter(30, 6));
+  test(...unsubscribe(42));
+  test(...waiter(43, 6));
 
-  test('#31 => Length of calls of "dumbFn" is "86"', () => {
-    expect(dumbFn).toBeCalledTimes(86);
+  test('#44 => Length of calls of "dumbFn" is "33"', () => {
+    expect(dumbFn).toBeCalledTimes(33);
   });
 
-  describe('#32 => Check the service', () => {
+  describe('#45 => Check the service', () => {
     test(
       ...value(
         {
@@ -334,7 +357,32 @@ describe('interpret', () => {
     test(...select('data', FAKES, 6));
   });
 
-  describe('#33 => Close the service', async () => {
+  describe('#46 => Close the service', async () => {
+    describe(
+      ...eventsSequenced(
+        1,
+        'machine$$init',
+        'NEXT',
+        {
+          type: 'WRITE',
+          payload: {
+            value: '',
+          },
+        },
+        {
+          type: 'WRITE',
+          payload: {
+            value: INPUT,
+          },
+        },
+        'FETCH',
+        {
+          type: 'fetch::then',
+          payload: FAKES,
+        },
+      ),
+    );
+
     test(...stop(2));
 
     test('#03 => Log the time of all tests', () => {
